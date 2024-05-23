@@ -1,4 +1,5 @@
 const businessBtn = document.getElementById('businessBtn'),
+generalBtn = document.getElementById('generalBtn'),
 educationBtn = document.getElementById('educationBtn'),
 entertainmentBtn = document.getElementById('entertainmentBtn'),
 technologyBtn = document.getElementById('technologyBtn'),
@@ -8,14 +9,21 @@ searchBtn = document.getElementById('searchBtn'),
 newsQuery = document.getElementById('newsQuery');
 
 const API_KEY = 'pub_4461207b1f71381099421f69294d0bc135c55',
+GENERAL_API = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=news&country=in&language=en`
 BUSINESS_API = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&category=business&country=in&language=en`,
 EDUCATION_API = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&category=education&country=in&language=en`,
 TECHNOLOGY_API =`https://newsdata.io/api/1/latest?apikey=${API_KEY}&category=technology&country=in&language=en` ,
 SPORTS_API = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&category=sports&country=in&language=en`,
-ENTERTAINMENT_QUERY = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&category=entertainment&country=in&language=en`,
+ENTERTAINMENT_API= `https://newsdata.io/api/1/latest?apikey=${API_KEY}&category=entertainment&country=in&language=en`,
 POLITICS_API =`https://newsdata.io/api/1/latest?apikey=${API_KEY}&category=poilitics&country=in&language=en` ;
 
+window.addEventListener("load", () => {
+    fetchingGeneralNews();
+});
 
+generalBtn.addEventListener('click',function(){
+    fetchingGeneralNews();
+})
 businessBtn.addEventListener('click',function(){
     fetchingBusinessNews();
 });
@@ -41,57 +49,168 @@ searchBtn.addEventListener('click',function(){
 
 newsDataArr = [];
 
-const fetchingBusinessNews = async () => {
-       const response = await fetch(BUSINESS_API );
+const fetchingGeneralNews = async () => {
+    try {
+        const response = await fetch(GENERAL_API);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const myJSON = await response.json();
-        newsDataArr = myJSON.results;
+        console.log(myJSON);
+        if (Array.isArray(myJSON.results)) {
+            newsDataArr = myJSON.results;
+        } else {
+            newsDataArr = [];
+        }
         displayNews();
+    } catch (error) {
+        console.error('Error fetching news:', error);
+        newsdetails.innerHTML = `<h1>Error fetching news data</h1>`;
+    }
+}
+
+
+const fetchingBusinessNews = async () => {
+    try {
+        const response = await fetch(BUSINESS_API);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const myJSON = await response.json();
+        console.log(myJSON);
+        if (Array.isArray(myJSON.results)) {
+            newsDataArr = myJSON.results;
+        } else {
+            newsDataArr = [];
+        }
+        displayNews();
+    } catch (error) {
+        console.error('Error fetching news:', error);
+        newsdetails.innerHTML = `<h1>Error fetching news data</h1>`;
+    }
 }
 
 const fetchingEducationNews = async () => {
+    try {
         const response = await fetch(EDUCATION_API);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const myJSON = await response.json();
-        newsDataArr = myJSON.results;
+        console.log(myJSON);
+        if (Array.isArray(myJSON.results)) {
+            newsDataArr = myJSON.results;
+        } else {
+            newsDataArr = [];
+        }
         displayNews();
+    } catch (error) {
+        console.error('Error fetching news:', error);
+        newsdetails.innerHTML = `<h1>Error fetching news data</h1>`;
+    }
 }
 
 const fetchingTechnologyNews = async () => {
+    try {
         const response = await fetch(TECHNOLOGY_API);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const myJSON = await response.json();
-        newsDataArr = myJSON.results;
+        console.log(myJSON);
+        if (Array.isArray(myJSON.results)) {
+            newsDataArr = myJSON.results;
+        } else {
+            newsDataArr = [];
+        }
         displayNews();
+    } catch (error) {
+        console.error('Error fetching news:', error);
+        newsdetails.innerHTML = `<h1>Error fetching news data</h1>`;
+    }
 }
 
 const fetchingSportsNews = async () => {
+    try {
         const response = await fetch(SPORTS_API);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const myJSON = await response.json();
-        newsDataArr = myJSON.results;
+        console.log(myJSON);
+        if (Array.isArray(myJSON.results)) {
+            newsDataArr = myJSON.results;
+        } else {
+            newsDataArr = [];
+        }
         displayNews();
+    } catch (error) {
+        console.error('Error fetching news:', error);
+        newsdetails.innerHTML = `<h1>Error fetching news data</h1>`;
+    }
 }
 
 const fetchingPoliticsNews = async () => {
-        const response = await fetch(POLITICS_API);
+    try {
+        const response = await fetch(POLITICS_API );
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const myJSON = await response.json();
-        newsDataArr = myJSON.results;
+        console.log(myJSON);
+        if (Array.isArray(myJSON.results)) {
+            newsDataArr = myJSON.results;
+        } else {
+            newsDataArr = [];
+        }
         displayNews();
+    } catch (error) {
+        console.error('Error fetching news:', error);
+        newsdetails.innerHTML = `<h1>Error fetching news data</h1>`;
+    }
 }
 
 const fetchingEntertainmentNews = async () => {
-        const response = await fetch(ENTERTAINMENT_QUERY);
+    try {
+        const response = await fetch(ENTERTAINMENT_API);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const myJSON = await response.json();
-        newsDataArr = myJSON.results;
+        console.log(myJSON);
+        if (Array.isArray(myJSON.results)) {
+            newsDataArr = myJSON.results;
+        } else {
+            newsDataArr = [];
+        }
         displayNews();
+    } catch (error) {
+        console.error('Error fetching news:', error);
+        newsdetails.innerHTML = `<h1>Error fetching news data</h1>`;
+    }
 }
 
 const fetchingSearchNews = async () => {
     const query = newsQuery.value;
-    const SEARCH_QUERY = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&category=&country=in&language=en`;
+    const SEARCH_QUERY = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=${query}&country=in&language=en`;
+    try {
         const response = await fetch(SEARCH_QUERY);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const myJSON = await response.json();
-        newsDataArr = myJSON.results;
+        console.log(myJSON);
+        if (Array.isArray(myJSON.results)) {
+            newsDataArr = myJSON.results;
+        } else {
+            newsDataArr = [];
+        }
         displayNews();
-}
-
+    } catch (error) {
+        console.error('Error fetching news:', error);
+        newsdetails.innerHTML = `<h1>Error fetching news data</h1>`;
+    }
+};
 
 function displayNews(){
     newsdetails.innerHTML = '';
